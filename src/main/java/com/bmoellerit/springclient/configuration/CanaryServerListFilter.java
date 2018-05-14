@@ -4,6 +4,9 @@ import com.netflix.loadbalancer.Server;
 import com.netflix.loadbalancer.ServerListFilter;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cloud.consul.discovery.ConsulServer;
 
 /**
  * Created by Bernd on 12.05.2018.
@@ -12,11 +15,19 @@ import java.util.List;
  */
 public class CanaryServerListFilter implements ServerListFilter<Server> {
 
+  private static final Logger LOGGER = LoggerFactory.getLogger(CanaryServerListFilter.class);
+
   @Override
   public List<Server> getFilteredListOfServers(List<Server> list) {
 
-    List<Server> srvList= new ArrayList<>();
-    srvList.add(new Server("192.168.2.11",8080));
-    return srvList;
+    ConsulServer cSrv;
+
+    for(Server srv: list){
+      cSrv = (ConsulServer) srv;
+      LOGGER.info(srv.toString() + "Metadata: " + cSrv.getMetadata().get("abcd"));
+    }
+
+
+    return list;
   }
 }

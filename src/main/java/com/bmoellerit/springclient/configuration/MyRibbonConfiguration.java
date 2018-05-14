@@ -38,7 +38,6 @@ public class MyRibbonConfiguration {
     }
 
     @Bean
-    @Profile("noconsul")
     public ServerListFilter<Server> serverListFilter(){
       return new CanaryServerListFilter();
     }
