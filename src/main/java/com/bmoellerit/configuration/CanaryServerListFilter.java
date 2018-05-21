@@ -1,4 +1,4 @@
-package com.bmoellerit.springclient.configuration;
+package com.bmoellerit.configuration;
 
 import com.netflix.loadbalancer.Server;
 import com.netflix.loadbalancer.ServerListFilter;
@@ -10,7 +10,7 @@ import org.springframework.cloud.consul.discovery.ConsulServer;
 /**
  * Created by Bernd on 12.05.2018.
  *
- * Package com.bmoellerit.springclient.configuration
+ * Package com.bmoellerit.configuration
  */
 public class CanaryServerListFilter implements ServerListFilter<Server> {
 

@@ -1,4 +1,4 @@
-package com.bmoellerit.springclient.configuration;
+package com.bmoellerit.configuration;
 
 import com.netflix.loadbalancer.Server;
 import com.netflix.loadbalancer.ServerList;
@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Bernd on 12.05.2018.
  *
- * Package com.bmoellerit.springclient.configuration
+ * Package com.bmoellerit.configuration
  */
 public class MyCustomServerList implements ServerList {
 

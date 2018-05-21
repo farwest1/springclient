@@ -1,4 +1,4 @@
-package com.bmoellerit.springclient.configuration;
+package com.bmoellerit.configuration;
 
 import com.netflix.client.config.IClientConfig;
 import com.netflix.loadbalancer.AbstractLoadBalancerRule;
@@ -7,7 +7,7 @@ import com.netflix.loadbalancer.Server;
 /**
  * Created by Bernd on 14.05.2018.
  *
- * Package com.bmoellerit.springclient.configuration
+ * Package com.bmoellerit.configuration
  */
 public class CanaryDeploymentRule extends AbstractLoadBalancerRule {
 

@@ -2,7 +2,7 @@ package com.bmoellerit.springclient;
 
 
 
-import com.bmoellerit.springclient.configuration.MyRibbonConfiguration;
+import com.bmoellerit.configuration.MyRibbonConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -24,8 +24,7 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableZuulProxy
-@EnableAutoConfiguration
-@RibbonClient(name = "berndsClient", configuration = MyRibbonConfiguration.class)
+@RibbonClient(name = "${springclient.servicename}", configuration = MyRibbonConfiguration.class)
 public class Application {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
