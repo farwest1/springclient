@@ -2,7 +2,6 @@ package com.bmoellerit.springclient.configuration;
 
 import com.netflix.loadbalancer.Server;
 import com.netflix.loadbalancer.ServerListFilter;
-import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

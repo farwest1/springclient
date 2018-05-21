@@ -1,11 +1,11 @@
 package com.bmoellerit.springclient.configuration;
 
-import com.bmoellerit.springclient.configuration.MyRibbonConfiguration.RibbonConfiguration;
+import com.netflix.client.config.IClientConfig;
+import com.netflix.loadbalancer.IRule;
 import com.netflix.loadbalancer.Server;
 import com.netflix.loadbalancer.ServerList;
 import com.netflix.loadbalancer.ServerListFilter;
-import org.springframework.cloud.netflix.ribbon.RibbonClient;
-import org.springframework.cloud.netflix.ribbon.ZonePreferenceServerListFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -16,32 +16,29 @@ import org.springframework.context.annotation.Profile;
  * Package com.bmoellerit.springclient.configuration
  */
 
-//TODO: Avoid this to be part of component scan (see documentation in internet)
-@Configuration
-@RibbonClient(name = "berndsClient", configuration = RibbonConfiguration.class)
+
+
 public class MyRibbonConfiguration {
 
-  @Configuration
-  protected static class RibbonConfiguration{
+  @Autowired
+  IClientConfig iClientConfig;
 
-//    @Bean
-//    public ZonePreferenceServerListFilter serverListFilter() {
-//      ZonePreferenceServerListFilter filter = new ZonePreferenceServerListFilter();
-//      filter.setZone("myTestZone");
-//      return filter;
-//    }
-
-    @Bean
-    @Profile("noconsul")
-    public ServerList<Server> ribbonServerList() {
-      return new MyCustomServerList();
-    }
-
-    @Bean
-    public ServerListFilter<Server> serverListFilter(){
-      return new CanaryServerListFilter();
-    }
-
+  @Bean
+  public ServerList<Server> ribbonServerList() {
+    return new MyCustomServerList();
   }
 
+  @Bean
+  public ServerListFilter<Server> serverListFilter(){
+    return new CanaryServerListFilter();
+  }
+
+
+
+  @Bean
+  public IRule canaryDeploymentRule(IClientConfig config) {
+    CanaryDeploymentRule rule = new CanaryDeploymentRule ();
+    rule.initWithNiwsConfig(config);
+    return rule;
+  }
 }
